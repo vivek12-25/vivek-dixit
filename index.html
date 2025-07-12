@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #121022;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #121222;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #140c0c;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #0d0d13;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 100px 0;
+            scroll-snap-align: start;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Home Section */
+        .home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+        }
+
+        .home-content {
+            flex: 1;
+        }
+
+        .home-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #1a1212;
+        }
+
+        .home-content .subtitle {
+            font-size: 1.2rem;
+            color: #291818;
+            margin-bottom: 2rem;
+        }
+
+        .home-content p {
+            font-size: 1rem;
+            color: #241818;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #102c57;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #aba2be;
+            transform: translateY(-2px);
+        }
+
+        .home-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #47464e;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #090814;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #aba2be;
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c63ff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .about-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: #f8f9fa;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #0e0d17;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(45deg, #0e0d17, #0e0d17);
+            transition: width 2s ease;
+        }
+
+        /* Qualification Section */
+        .qualification {
+            background: white;
+        }
+
+        .qualification-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid #0e0d17;
+            color: #0e0d17;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #0e0d17;
+            color: white;
+        }
+
+        .qualification-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .qualification-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .qualification-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #0e0d17;
+            transform: translateX(-50%);
+        }
+
+        .qualification-data {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .qualification-data h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .qualification-data .subtitle {
+            color: #6c63ff;
+            font-weight: 500;
+        }
+
+        .qualification-data .date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .qualification-item:nth-child(even) .qualification-data {
+            margin-left: auto;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: #f8f9fa;
+        }
+
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #0e0d17;
+        }
+
+        .experience-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .company {
+            color: #0e0d17;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #0e0d17, #0e0d17);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: #0e0d17;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: #0e0d17;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links .btn {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #f8f9fa;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #0e0d17;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0e0d17;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #6c63ff;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .home {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .home-content h1 {
+                font-size: 2rem;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Vivek Dixit</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#qualification" class="nav-link">Qualification</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="container">
+            <div class="home">
+                <div class="home-content">
+                    <h1>Hi, I'm Vivek Dixit</h1>
+                    <p class="subtitle">I am a Data Analyst</p>
+                    <p>B.Tech CSE from <strong>Babu Banarasi Das Northern India Institute of Technology </strong>, Lucknow.</p>
+                    <a href="#contact" class="btn">Contact me</a>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/vivek-dixit-8172191b5/" title="LinkedIn">📧</a>
+                        <a href="https://github.com/viv1-tech" title="GitHub">🔗</a>
+                        <a href="https://medium.com/@vivek542dixit" title="Medium">📝</a>
+                    </div>
+                </div>
+                <div class="home-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQGijesd3gJ2Yg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1693750737445?e=1757548800&v=beta&t=WIoLJY4zKNMWlaWeFfw3rqmifX95x2IGIm4wjuHIz5U" alt="Profile" class="profile-img">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll down</span>
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about">
+                <div class="about-image">
+                    <img src="https://pbs.twimg.com/profile_images/1907762345012768773/9B1yvOI6_400x400.jpg" alt="About">
+                </div>
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <p class="subtitle">My introduction</p>
+                    <p>MSc Mathematics and Computing graduate from IIT (ISM) Dhanbad, with a strong foundation in mathematics and a keen interest in data science, cryptography, and blockchain technology.</p>
+                    <p>Proficient in Python, SQL, and cloud computing platforms, I am passionate about leveraging data to uncover insights and drive innovation. Currently exploring the exciting fields of cryptography and blockchain, eager to apply my analytical skills to real-world challenges.</p>
+                    <a href="#" class="btn">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <p style="text-align: center; color: #666;">My technical level</p>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><span>💻</span> Programming Languages</h3>
+                    <div class="skill-item">
+                        <span>Python</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>SQL</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>JavaScript</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><span>📊</span> Data Science and ML</h3>
+                    <div class="skill-item">
+                        <span>Machine Learning</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Data Analysis</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Statistics</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><span>🔐</span> Cryptography & Blockchain</h3>
+                    <div class="skill-item">
+                        <span>Cryptography</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Blockchain</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Smart Contracts</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><span>🏗️</span> IT Constructs</h3>
+                    <div class="skill-item">
+                        <span>Cloud Computing</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Docker</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Git</span>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qualification Section -->
+    <section id="qualification" class="qualification">
+        <div class="container">
+            <h2 class="section-title">Qualification</h2>
+            <p style="text-align: center; color: #666;">My personal journey</p>
+            <div class="qualification-tabs">
+                <button class="tab-btn active">🎓 Education</button>
+            </div>
+            <div class="qualification-content">
+                <!-- <div class="qualification-item">
+                    <div class="qualification-data">
+                        <h3>Master of Science</h3>
+                        <div class="subtitle">Indian Institute of Technology</div>
+                        <div class="date">📅 2022 - 2024</div>
+                    </div>
+                </div> -->
+                <div class="qualification-item">
+                    <div class="qualification-data">
+                        <h3>Bachelor of Technology</h3>
+                        <div class="subtitle">Babu Banarasi Das Northern Indian Institute of technology</div>
+                        <div class="date">📅 2019 - 2023</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <p style="text-align: center; color: #666;">My work experience</p>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h3>Data Scientist I</h3>
+                    <div class="company">Networth Corp</div>
+                    <div class="date">📅 Nov 2024 - Present</div>
+                    <p>Working on advanced data analysis projects, implementing machine learning models, and providing insights to drive business decisions.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Data Science Intern</h3>
+                    <div class="company">Infinite Analytics</div>
+                    <div class="date">📅 April 2024 - Oct 2024</div>
+                    <p>Developed predictive models, performed data preprocessing, and created visualizations to support data-driven decision making.</p>
+                </div>
+                <div class="experience-item">
+                    <h3>Research Intern</h3>
+                    <div class="company">Indian Institute of Technology, Dhanbad</div>
+                    <div class="date">📅 January 2024 - May 2024</div>
+                    <p>Conducted research in cryptography and blockchain technology, contributing to academic publications and innovative solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p style="text-align: center; color: #666;">Most recent work</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">🧠</div>
+                    <div class="project-content">
+                        <h3>Neural Network for Handwritten Digits Classification</h3>
+                        <p>The MNIST dataset is a widely used dataset in the field of machine learning and computer vision. It consists of 28x28 pixel grayscale images of handwritten digits (0 through 9), along with their corresponding labels. The goal of this project is to train a neural network model to accurately classify these digits.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">GitHub Repository</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3>Data Analysis Dashboard</h3>
+                        <p>Interactive dashboard for analyzing large datasets with real-time visualizations and insights. Built using Python, Pandas, and Streamlit.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">GitHub Repository</a>
+                            <a href="#" class="btn">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">🔐</div>
+                    <div class="project-content">
+                        <h3>Cryptography Research</h3>
+                        <p>Research project on advanced cryptographic algorithms and their applications in blockchain technology. Exploring new methods for secure data transmission.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn">Research Paper</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <p style="text-align: center; color: #666;">Get in touch</p>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>vivek542dixit@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 6307469542</p>
+                        </div>  
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Lucknow , India</p>
+                        </div>  
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>  
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group  ">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea> 
+                        </div>
+                        <button type="submit" class="btn">Send Message</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>  
+        
+    <!-- Footer -->
+    <!-- <footer class="footer"> 
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#qualification">Qualification</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" title="LinkedIn">🔗</a>
+                <a href="#" title="GitHub">🐱</a>
+                <a href="#" title="Medium">📝</a>
+            </div>
+        </div>
+        <p>&copy; 2024 vivek542dixit. All rights reserved.</p>
+    </footer> -->
+</body>
+</html>
+<script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Highlight active section in navigation
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+<style>
+    /* Additional styles for the contact form */
+    .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-form .form-group label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .contact-form .form-group input,
+    .contact-form .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e9ecef;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .contact-form .form-group input:focus,
+    .contact-form .form-group textarea:focus {
+        outline: none;
+        border-color: #6c63ff;
+    }
+    .contact-form button {
+        background: #0e0d17;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .contact-form button:hover {
+        background: #5753d4;
+        transform: translateY(-2px);
+    }
+    .contact-form button:active {
+        transform: translateY(0);
+    }
+    .contact-form button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+    .contact-form button:disabled:hover {
+        background: #ccc;
+        transform: none;
+    }
+</style>
+</html>
